@@ -1,0 +1,26 @@
+[tool.poetry]
+name = "awsa"
+version = "0.1.0"
+description = ""
+authors = ["Pratuat Amatya <pratuat@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+beautifulsoup4 = "^4.12.3"
+aiohttp = "^3.9.5"
+googlesearch-python = "^1.2.4"
+# microsoft-bing-websearch = "^1.0.0"
+# py-bing-search = "^0.2.6"
+langchain-openai = "^0.1.6"
+langchain = "^0.1.17"
+langchain-community = "^0.0.36"
+
+
+[tool.poetry.group.dev.dependencies]
+ipykernel = "^6.29.4"
+python-dotenv = "^1.0.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
