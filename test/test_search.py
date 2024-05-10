@@ -3,6 +3,7 @@ import asyncio
 
 from src.search import Search, GoogleSearch, fetch_query_urls
 
+
 @pytest.mark.unit
 def test_search_class():
     ret_value = ["query result"]
@@ -10,7 +11,7 @@ def test_search_class():
     class Klass(Search):
         def _search(self, query):
             return ret_value
-        
+
     assert asyncio.run(Klass(id="id").search("dummy query")) == ret_value
 
 

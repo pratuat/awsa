@@ -27,4 +27,3 @@ Download and run a LLM model locally https://ollama.com/.
 ### 4. Run streamlit app
 
 Run `poetry run PYTHONPATH=. streamlit run src/app.py` to start the app server and click on web url displayed in the server log.
-

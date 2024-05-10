@@ -1,9 +1,8 @@
 import pytest
 import pathlib
 
-from src.query import (
-    create_query_directory
-)
+from src.query import create_query_directory
+
 
 @pytest.mark.unit
 @pytest.mark.parametrize("query,urls", [["dummy query", ["url_1", "url_2"]]])

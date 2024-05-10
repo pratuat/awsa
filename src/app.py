@@ -7,9 +7,7 @@ from src.query import query
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s [%(levelname)s] %(message)s",
-    handlers=[
-        logging.StreamHandler()
-    ]
+    handlers=[logging.StreamHandler()],
 )
 
 logger = logging.getLogger()
@@ -17,7 +15,9 @@ logger = logging.getLogger()
 st.title("💬 Chatbot")
 
 if "messages" not in st.session_state:
-    st.session_state["messages"] = [{"role": "assistant", "content": "Which topic you want to query today ?"}]
+    st.session_state["messages"] = [
+        {"role": "assistant", "content": "Which topic you want to query today ?"}
+    ]
 
 for msg in st.session_state.messages:
     st.chat_message(msg["role"]).write(msg["content"])
