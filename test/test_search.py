@@ -1,7 +1,7 @@
 import pytest
 import asyncio
 
-from src.search import Search, GoogleSearch, fetch_query_urls
+from src.search import Search, GoogleSearch, YahooSearch, fetch_query_urls
 
 
 @pytest.mark.unit
@@ -18,6 +18,11 @@ def test_search_class():
 @pytest.mark.unit
 def test_google_search_class():
     assert asyncio.run(GoogleSearch().search("climage change"))
+
+
+@pytest.mark.unit
+def test_yahoo_search_class():
+    assert asyncio.run(YahooSearch().search("climage change"))
 
 
 @pytest.mark.unit

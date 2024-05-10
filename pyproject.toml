@@ -7,24 +7,21 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "3.11.7"
-beautifulsoup4 = "^4.12.3"
 aiohttp = "^3.9.5"
 googlesearch-python = "^1.2.4"
-# microsoft-bing-websearch = "^1.0.0"
-# py-bing-search = "^0.2.6"
-langchain-openai = "^0.1.6"
 langchain = "^0.1.17"
 langchain-community = "^0.0.36"
 aiofiles = "^23.2.1"
 unstructured = "^0.13.6"
 streamlit = "^1.34.0"
-pre-commit = "^3.7.0"
+yahoo-search-py = "^0.3"
 
 
 [tool.poetry.group.dev.dependencies]
 ipykernel = "^6.29.4"
 python-dotenv = "^1.0.1"
 pytest = "^8.2.0"
+pre-commit = "^3.7.0"
 
 [build-system]
 requires = ["poetry-core"]

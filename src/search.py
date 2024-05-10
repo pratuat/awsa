@@ -1,6 +1,7 @@
 import logging
 import asyncio
 import googlesearch
+import yahoo_search
 from itertools import chain
 from abc import abstractmethod, ABC
 
@@ -32,12 +33,21 @@ class GoogleSearch(Search):
         return [url for url in googlesearch.search(query, num_results=self.num_result)]
 
 
+class YahooSearch(Search):
+    def __init__(self, id: str = "Yahoo"):
+        super().__init__(id=id)
+
+    def _search(self, query: str = None):
+        return [page.link for page in yahoo_search.search(query).pages]
+
+
 async def fetch_query_urls(query: str):
     if not str:
         raise ValueError("Empty query string.")
 
     search_engines = [
-        GoogleSearch(id="Google", num_result=10),
+        GoogleSearch(num_result=10),
+        YahooSearch(),
     ]
     urls = await asyncio.gather(
         *[search_engine.search(query) for search_engine in search_engines]
