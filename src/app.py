@@ -1,4 +1,3 @@
-import asyncio
 import logging
 import streamlit as st
 from langchain_community.llms import Ollama
@@ -16,7 +15,7 @@ st.title("💬 Chatbot")
 
 if "messages" not in st.session_state:
     st.session_state["messages"] = [
-        {"role": "assistant", "content": "Which topic you want to query today ?"}
+        {"role": "assistant", "content": "Which topic do you want to query today?"}
     ]
 
 for msg in st.session_state.messages:

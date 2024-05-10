@@ -3,7 +3,7 @@ import asyncio
 import googlesearch
 import yahoo_search
 from itertools import chain
-from abc import abstractmethod, ABC
+from abc import ABC, abstractmethod
 
 logger = logging.getLogger()
 
@@ -16,7 +16,6 @@ class Search(ABC):
         logger.info(f"{self.id} is searching query: {query}")
         result = await asyncio.to_thread(self._search, query)
         logger.info(f"{self.id} has returned query: {query}")
-
         return result
 
     @abstractmethod
@@ -42,11 +41,11 @@ class YahooSearch(Search):
 
 
 async def fetch_query_urls(query: str):
-    if not str:
+    if not query:
         raise ValueError("Empty query string.")
 
     search_engines = [
-        GoogleSearch(num_result=10),
+        GoogleSearch(num_result=5),
         YahooSearch(),
     ]
     urls = await asyncio.gather(

@@ -6,14 +6,15 @@ import yaml
 import asyncio
 import aiohttp
 import aiofiles
-from src.search import fetch_query_urls
 from typing import List
+from src.search import fetch_query_urls
 from src.llm import summarize_html_document, reduce_document_summaries
 
-logger = logging.getLogger()
+logger = logging.getLogger(__name__)
+logging.basicConfig(level=logging.INFO)
 
 
-def create_query_directory(query, urls):
+def create_query_directory(query: str, urls: List[str]) -> pathlib.Path:
     query_uuid = str(uuid.uuid4())
     dir_path = pathlib.Path(os.getcwd()) / "data" / "docs" / query_uuid
 
@@ -31,12 +32,12 @@ def create_query_directory(query, urls):
 
 async def get_document_summary(
     file_path: pathlib.Path, url: str, semaphore: asyncio.Semaphore
-):
-    logger.info("Fetch content for url: %s" % (url,))
+) -> str:
+    logger.info("Fetch content for url: %s" % url)
     try:
         async with aiohttp.ClientSession() as session:
             async with session.get(url) as response:
-                logger.info(f"URL[{url}]: Response recevied.")
+                logger.info(f"URL[{url}]: Response received.")
                 logger.info(f"URL[{url}]: Response status: {response.status}")
 
                 if response.status == 200:
@@ -54,7 +55,7 @@ async def get_document_summary(
         return None
 
 
-async def get_query_summaries(dir_path: pathlib.Path, urls: List[str]):
+async def get_query_summaries(dir_path: pathlib.Path, urls: List[str]) -> List[str]:
     semaphore = asyncio.Semaphore(value=5)
 
     return await asyncio.gather(
@@ -65,14 +66,14 @@ async def get_query_summaries(dir_path: pathlib.Path, urls: List[str]):
     )
 
 
-def query(query: str):
-    logger.info("Running query for: %s" % (query,))
+def query(query: str) -> str:
+    logger.info("Running query for: %s" % query)
 
     urls = set([url for url in asyncio.run(fetch_query_urls(query=query))])
-    logger.info("Retrieved no. of urls: %d" % (len(urls)))
+    logger.info("Retrieved no. of urls: %d" % len(urls))
 
     dir_path = create_query_directory(query, list(urls))
-    logger.info("Directory created for query: %s" % (dir_path))
+    logger.info("Directory created for query: %s" % dir_path)
 
     summaries = list(
         filter(lambda x: x, asyncio.run(get_query_summaries(dir_path, urls)))
@@ -85,7 +86,7 @@ def query(query: str):
         logger.info("=" * 50)
 
         summary = reduce_document_summaries(summaries)
-        logger.info("Query summary: %s" % (summary,))
+        logger.info("Query summary: %s" % summary)
 
         return summary
     else:
