@@ -6,9 +6,9 @@ import yaml
 import asyncio
 import aiohttp
 import aiofiles
-from search import fetch_query_urls
+from src.search import fetch_query_urls
 from typing import List
-from llm import summarize_html_document, reduce_document_summaries
+from src.llm import summarize_html_document, reduce_document_summaries
 
 logger = logging.getLogger()
 

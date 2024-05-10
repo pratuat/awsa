@@ -2,7 +2,7 @@ import asyncio
 import logging
 import streamlit as st
 from langchain_community.llms import Ollama
-from query import query
+from src.query import query
 
 logging.basicConfig(
     level=logging.INFO,

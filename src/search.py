@@ -7,6 +7,9 @@ from abc import abstractmethod, ABC
 logger = logging.getLogger()
 
 class Search(ABC):
+    def __init__(self, id):
+        self.id = id
+
     async def search (self, query):
         logger.info(f"{self.id} is searching query: {query}")
         result = await asyncio.to_thread(self._search, query)
@@ -19,8 +22,8 @@ class Search(ABC):
         pass
 
 class GoogleSearch(Search):
-    def __init__(self,id: str = None, num_result: int = 5):
-        self.id = id
+    def __init__(self,id: str = "Google", num_result: int = 5):
+        super().__init__(id=id)
         self.num_result = num_result
 
     def _search(self, query: str = None):
