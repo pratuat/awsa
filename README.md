@@ -28,7 +28,10 @@ Download and run a LLM model locally https://ollama.com/.
 
 Run `poetry run PYTHONPATH=. streamlit run src/app.py` to start the app server and click on web url displayed in the server log.
 
+### 5. Run tests
 
-### 5. Screenshot
+To run tests, run `poetry run PYTHONPATH=. pytest test`
+
+### 6. Screenshot
 
 ![Screenshot](./screenshot.png)
